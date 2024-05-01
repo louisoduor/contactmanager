@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid"; // Import uuidv4
 
 import "./App.css";
 import { Header } from "./Components/Header";
@@ -14,6 +15,7 @@ function App() {
   const [contacts, setContacts] = useState(retrieveContacts || []);
 
   const addContact = (newContact) => {
+    newContact.id = uuidv4();
     setContacts([...contacts, newContact]);
   };
 
@@ -21,12 +23,17 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
+  //delete item function
+  const deleteContact = (id) => {
+    const updatedContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(updatedContacts);
+  };
 
   return (
     <>
       <Header />
       <AddContact addContact={addContact} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} deleteContact={deleteContact} />
     </>
   );
 }

@@ -1,6 +1,9 @@
 import React from "react";
 
-export const ContactCard = ({ contacts }, { key }) => {
+export const ContactCard = ({ contacts, deleteContact, key }) => {
+  const handleDelete = () => {
+    deleteContact(contacts.id);
+  };
   return (
     <div key={key} className="flex items-start ">
       <img
@@ -32,6 +35,7 @@ export const ContactCard = ({ contacts }, { key }) => {
             marginTop: "7px",
             marginLeft: "170px",
           }}
+          onClick={handleDelete}
         />
       </div>
     </div>

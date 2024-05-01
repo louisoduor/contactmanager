@@ -1,11 +1,15 @@
 import React from "react";
 import { ContactCard } from "./ContactCard";
 
-export const ContactList = ({ contacts }) => {
-  const renderedContacts = contacts.map((contacts, index) => {
+export const ContactList = ({ contacts, deleteContact }) => {
+  const renderedContacts = contacts.map((contacts) => {
     return (
       <>
-        <ContactCard key={index} contacts={contacts} />
+        <ContactCard
+          key={contacts.id}
+          contacts={contacts}
+          deleteContact={deleteContact}
+        />
       </>
     );
   });
